@@ -36,6 +36,7 @@
 
         <EditText
             android:layout_width="match_parent"
+            android:id="@+id/registName"
             android:layout_height="wrap_content"
             android:background="@drawable/nama"
             android:fontFamily="@font/poppinsregular"
@@ -46,6 +47,7 @@
 
         <EditText
             android:layout_width="match_parent"
+            android:id="@+id/registerUsername"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/username"
@@ -59,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:id="@+id/registerPhone"
             android:background="@drawable/telp"
             android:fontFamily="@font/poppinsregular"
             android:hint="Nomor Telp"
@@ -70,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:id="@+id/registerPassword"
             android:background="@drawable/password"
             android:fontFamily="@font/poppinsregular"
             android:hint="Password"
@@ -82,10 +86,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:id="@+id/registerButton1"
             android:background="@drawable/button_shape"
             android:backgroundTint="@color/teal_200"
             android:fontFamily="@font/poppinssemibold"
-            android:text="Masuk" />
+            android:text="Daftar" />
 
         <TextView
             android:layout_width="341dp"

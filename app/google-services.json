@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1032641701684",
+    "project_id": "sip-kopi-project",
+    "storage_bucket": "sip-kopi-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032641701684:android:b8ac1b5c74275455ada761",
+        "android_client_info": {
+          "package_name": "com.example.bottomnavyt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032641701684-i2gnhk2ki5tj1v6572t0vdn26v9h7cin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bottomnavyt",
+            "certificate_hash": "24a67187197e3abbe8ca65b09c9c223037d43507"
+          }
+        },
+        {
+          "client_id": "1032641701684-1gr7hvrua5iv88ppsfq76sg7f6h3ei9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApf8gz3-JIDPN3tmNqIyjd8uSpNduvEPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032641701684-1gr7hvrua5iv88ppsfq76sg7f6h3ei9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

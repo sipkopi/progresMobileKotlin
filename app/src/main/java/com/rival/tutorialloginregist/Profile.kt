@@ -5,55 +5,80 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.rival.tutorialloginregist.Scan.coffe
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Profile.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Profile : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var imageId: Array<Int>
+    private lateinit var names: Array<String>
+    private lateinit var ingredients: Array<String>
+
+    private lateinit var recView: RecyclerView
+    private lateinit var itemArrayList: ArrayList<coffe>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val view = inflater.inflate(R.layout.activity_recycler_view, container, false)
+
+        imageId = arrayOf(
+            R.drawable.kopi1,
+            R.drawable.kopi2,
+            R.drawable.kopi3,
+            R.drawable.kopi1,
+            R.drawable.kopi2,
+            R.drawable.kopi3,
+            R.drawable.kopi1,
+            R.drawable.kopi2,
+            R.drawable.kopi3
+        )
+
+        names = arrayOf(
+            "Arabica Coffee 1",
+            "Robusta Coffee 2",
+            "Liberica Coffee 3",
+            "Arabica Coffee 4",
+            "Robusta Coffee 5",
+            "Liberica Coffee 6",
+            "Arabica Coffee 7",
+            "Robusta Coffee 8",
+            "Liberica Coffee 9"
+        )
+
+        ingredients = arrayOf(
+            "Blue Mountain 1, cheese, oregano",
+            "Blue Mountain 2, cheese, oregano",
+            "Blue Mountain 3, cheese, oregano",
+            "Blue Mountain 4, cheese, oregano",
+            "Blue Mountain 5, cheese, oregano",
+            "Blue Mountain 6, cheese, oregano",
+            "Blue Mountain 7, cheese, oregano",
+            "Blue Mountain 8, cheese, oregano",
+            "Blue Mountain 9, cheese, oregano"
+        )
+
+        recView = view.findViewById(R.id.recView)
+        recView.layoutManager = GridLayoutManager(requireContext(), 3)
+        recView.setHasFixedSize(true)
+
+        itemArrayList = arrayListOf()
+
+        //getData()
+
+        //recView.adapter = RecAadapter(itemArrayList)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Profile.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Profile().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+//    private fun getData() {
+//        for (i in imageId.indices) {
+//            if (i < names.size && i < ingredients.size) {
+//                val coffee = coffe(imageId[i], names[i], ingredients[i])
+//                itemArrayList.add(coffee)
+//            }
+//        }
+//    }
 }

@@ -1,59 +1,121 @@
 package com.rival.tutorialloginregist
-
+import android.app.*
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.DatePicker
+import android.widget.EditText
+import android.widget.TimePicker
+import androidx.fragment.app.Fragment
+import com.rival.tutorialloginregist.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.rival.tutorialloginregist.channelID
+import com.rival.tutorialloginregist.messageExtra
+import com.rival.tutorialloginregist.notificationID
+import com.rival.tutorialloginregist.titleExtra
+import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SettingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SettingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var titleEditText: EditText
+    private lateinit var messageEditText: EditText
+    private lateinit var timePicker: TimePicker
+    private lateinit var datePicker: DatePicker
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+        val view = inflater.inflate(R.layout.fragment_setting, container, false)
+
+        titleEditText = view.findViewById(R.id.titleET)
+        messageEditText = view.findViewById(R.id.messageET)
+        timePicker = view.findViewById(R.id.timePicker)
+        datePicker = view.findViewById(R.id.datePicker)
+
+        val submitButton = view.findViewById<Button>(R.id.submitButton)
+        submitButton.setOnClickListener { scheduleNotification() }
+
+        createNotificationChannel()
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SettingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SettingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun scheduleNotification() {
+        val intent = Intent(requireContext(), Notification::class.java)
+        val title = titleEditText.text.toString()
+        val message = messageEditText.text.toString()
+        intent.putExtra(titleExtra, title)
+        intent.putExtra(messageExtra, message)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            notificationID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getTime()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val canScheduleExactAlarms = alarmManager.canScheduleExactAlarms()
+            if (canScheduleExactAlarms) {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    time,
+                    pendingIntent
+                )
+                showAlert(time, title, message)
+            } else {
+                // Handle the case where scheduling exact alarms is not permitted
+                // You might want to use setExact instead, or inform the user about the limitation.
             }
+        } else {
+            // For versions prior to Android 12 (API 31), use setExact directly
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent)
+            showAlert(time, title, message)
+        }
+    }
+
+    private fun showAlert(time: Long, title: String, message: String) {
+        val date = Date(time)
+        val dateFormat = android.text.format.DateFormat.getLongDateFormat(requireContext())
+        val timeFormat = android.text.format.DateFormat.getTimeFormat(requireContext())
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Notification Scheduled")
+            .setMessage(
+                "Title: $title\nMessage: $message\nAt: ${dateFormat.format(date)} ${timeFormat.format(date)}"
+            )
+            .setPositiveButton("Okay") { _, _ -> }
+            .show()
+    }
+
+    private fun getTime(): Long {
+        val minute = timePicker.minute
+        val hour = timePicker.hour
+        val day = datePicker.dayOfMonth
+        val month = datePicker.month
+        val year = datePicker.year
+
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day, hour, minute)
+        return calendar.timeInMillis
+    }
+
+    private fun createNotificationChannel() {
+        val name = "Notif Channel"
+        val desc = "A Description of the Channel"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelID, name, importance)
+        channel.description = desc
+        val notificationManager =
+            requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 }

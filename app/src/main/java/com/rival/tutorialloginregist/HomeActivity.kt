@@ -1,5 +1,6 @@
 package com.rival.tutorialloginregist
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,7 +19,8 @@ class HomeActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> replaceFragment(Home())
-                R.id.produck -> replaceFragment(Profile())
+                //R.id.Product -> replaceFragment(Profile())
+                R.id.fab -> replaceFragment(ScanFragment())
                 R.id.profile -> replaceFragment(Settings())
                 R.id.setting -> replaceFragment(SettingFragment())
                 else -> {
