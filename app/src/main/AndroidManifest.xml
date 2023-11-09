@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TutorialLoginRegist">
         <activity
+            android:name=".productadd"
+            android:exported="false" />
+        <activity
             android:name=".product"
             android:exported="false" />
         <activity
