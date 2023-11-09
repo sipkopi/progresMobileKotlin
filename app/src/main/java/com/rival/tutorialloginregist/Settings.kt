@@ -12,13 +12,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.rival.tutorialloginregist.R
-import com.rival.tutorialloginregist.LoginActivity
 
 class Settings : Fragment() {
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var textView6: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,13 +50,17 @@ class Settings : Fragment() {
 
         // Inside onCreateView() method
         val signOutButton = view.findViewById<Button>(R.id.btn_logout)
+        textView6 = view.findViewById(R.id.textView6)
         signOutButton.setOnClickListener {
             signOutAndStartSignInActivity()
+        }
+        textView6.setOnClickListener {
+            val intent = Intent(activity, Accountdetail::class.java)
+            startActivity(intent)
         }
 
         return view
     }
-
     private fun signOutAndStartSignInActivity() {
         mAuth.signOut()
 
@@ -69,3 +72,5 @@ class Settings : Fragment() {
         }
     }
 }
+
+

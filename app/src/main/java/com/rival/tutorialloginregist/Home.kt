@@ -21,6 +21,7 @@ class Home : Fragment() {
     private lateinit var usernameTextView: TextView
     private lateinit var adapter: RecyclerView.Adapter<*>
     private lateinit var recyclerViewList: RecyclerView
+    private lateinit var textView9 : TextView
 
 
     override fun onCreateView(
@@ -35,29 +36,12 @@ class Home : Fragment() {
         // Mengambil nama pengguna dari SessionManager
         val sessionManager = SessionManager(requireContext())
         val username = sessionManager.getUsername()
-        txt_Seeall = view.findViewById(R.id.txt_seeall)
-        txt_Seeall.setOnClickListener {
-            // Create an instance of Fragment2 (the destination fragment)
-            val fragment2 = Profile()
 
-            // Get the FragmentManager
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-
-            // Start a new FragmentTransaction
-            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-
-            // Replace the current fragment (Fragment1) with Fragment2
-            transaction.replace(R.id.recView, fragment2)
-            transaction.addToBackStack(null) // Add to the back stack (optional)
-
-            // Commit the transaction
-            transaction.commit()
-        }
-        txt_Seeall = view.findViewById(R.id.txt_seeall)
+        textView9 = view.findViewById(R.id.textView9)
 
         // Tambahkan onClickListener untuk TextView
-        txt_Seeall.setOnClickListener {
-            val intent = Intent(activity, NotifikasiActivity::class.java)
+        textView9.setOnClickListener {
+            val intent = Intent(activity, MainActivity2::class.java)
             startActivity(intent)
         }
 

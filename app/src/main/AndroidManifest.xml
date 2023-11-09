@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -12,14 +13,44 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:label="SIP Kopi"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TutorialLoginRegist">
         <activity
-            android:name=".NotifikasiActivity"
+            android:name=".product"
             android:exported="false" />
-
+        <activity
+            android:name=".pendataanadd"
+            android:exported="false" />
+        <activity
+            android:name=".pendataan"
+            android:exported="false" />
+        <activity
+            android:name=".pembibitanadd"
+            android:exported="false" />
+        <activity
+            android:name=".pembibitan"
+            android:exported="false" />
+        <activity
+            android:name=".editprofile"
+            android:exported="false" />
+        <activity
+            android:name=".setting3"
+            android:exported="false" />
+        <activity
+            android:name=".setting2"
+            android:exported="false"
+            android:label="@string/title_activity_setting2"
+            android:theme="@style/Theme.TutorialLoginRegist" />
+        <activity
+            android:name=".Accountdetail"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".NotifikasiActivity" -->
+        <!-- android:exported="false" /> -->
         <receiver
             android:name=".Notification"
             android:enabled="true" />
