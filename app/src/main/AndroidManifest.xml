@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TutorialLoginRegist">
         <activity
+            android:name=".pemupukanadd"
+            android:exported="false" />
+        <activity
             android:name=".datacuaca"
             android:exported="false" />
         <activity
@@ -27,7 +30,7 @@
             android:name=".product"
             android:exported="false" />
         <activity
-            android:name=".pendataanadd"
+            android:name=".penyiramanadd"
             android:exported="false" />
         <activity
             android:name=".pendataan"
