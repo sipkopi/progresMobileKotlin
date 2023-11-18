@@ -18,13 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TutorialLoginRegist">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".pemupukanadd"
             android:exported="false" />
         <activity
             android:name=".datacuaca"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".productadd"
             android:exported="false" />
         <activity
             android:name=".product"
@@ -80,7 +83,7 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".productadd"
+            android:name=".privacypolicy"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
